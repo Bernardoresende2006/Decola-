@@ -1,2 +1,2 @@
 # Decolaê
-Projeto de uma comopanhia aérea
+Projeto de uma companhia aérea
