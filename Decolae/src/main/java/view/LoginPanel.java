@@ -8,12 +8,12 @@ package view;
  *
  * @author lflea
  */
-public class TelaLoginPanel extends javax.swing.JPanel {
+public class LoginPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form TelaLoginPanel
      */
-    public TelaLoginPanel() {
+    public LoginPanel() {
         initComponents();
     }
 
