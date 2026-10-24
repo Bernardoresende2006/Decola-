@@ -21,4 +21,12 @@ public class Gerente extends Pessoa {
         super(cpf, nome, endereco, dataNascimento, sexo);
         this.salario = salario;
     }
+    
+    public float getSalario(){  
+        return salario;
+    }
+    
+    public void setSalario(float salario){    
+        this.salario = salario;
+    }
 }
