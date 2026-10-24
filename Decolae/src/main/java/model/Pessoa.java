@@ -10,18 +10,22 @@ public class Pessoa{
     private String endereco;
     private Date dataNascimento;
     private String sexo;
+    private String email;
+    private String senha;
 
     public Pessoa(){
 
     }
 
-    public Pessoa(String cpf, String nome, String endereco, Date dataNascimento, String sexo){
+    public Pessoa(String cpf, String nome, String endereco, Date dataNascimento, String sexo, String email, String senha){
 
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
+        this.email = email;
+        this.senha = senha;
     }
 
     public String getCpf() {
@@ -62,5 +66,21 @@ public class Pessoa{
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }   
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
+    }
+    
+    public String getSenha(){
+        return this.senha;
+    }
+    
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
 }

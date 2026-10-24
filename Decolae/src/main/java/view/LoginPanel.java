@@ -4,8 +4,11 @@
  */
 package view;
 
+import control.PessoaControl;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import model.Pessoa;
 
 /**
  *
@@ -14,10 +17,11 @@ import javax.swing.ImageIcon;
 public class LoginPanel extends javax.swing.JPanel {
 
     private FrameTelas frameTelas;
+    private PessoaControl control;
     
     public LoginPanel(FrameTelas frameTelas) {
         initComponents();
-        inicializacaoVariaveis();
+        inicializacaoVariaveis(frameTelas);
         minhasConfiguracoes();               
     }
 
@@ -32,8 +36,9 @@ public class LoginPanel extends javax.swing.JPanel {
         aviaoLabel.setIcon(imagemAviao);
     }
     
-    private void inicializacaoVariaveis(){
-        frameTelas = frameTelas;
+    private void inicializacaoVariaveis(FrameTelas frameTelas){
+        this.frameTelas = frameTelas;
+        this.control = new PessoaControl();
     }
     
     @SuppressWarnings("unchecked")
@@ -43,9 +48,9 @@ public class LoginPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         aviaoLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        cpfEmailTxt = new javax.swing.JTextField();
+        senhaTxt = new javax.swing.JTextField();
+        entrarBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -60,40 +65,40 @@ public class LoginPanel extends javax.swing.JPanel {
         aviaoLabel.setMinimumSize(new java.awt.Dimension(800, 450));
         aviaoLabel.setPreferredSize(new java.awt.Dimension(800, 450));
 
-        jTextField1.setBackground(new java.awt.Color(0, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 255));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        cpfEmailTxt.setBackground(new java.awt.Color(0, 255, 255));
+        cpfEmailTxt.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
+        cpfEmailTxt.setForeground(new java.awt.Color(0, 0, 255));
+        cpfEmailTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cpfEmailTxt.setToolTipText("");
+        cpfEmailTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                cpfEmailTxtActionPerformed(evt);
             }
         });
 
-        jTextField2.setBackground(new java.awt.Color(0, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 255));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        senhaTxt.setBackground(new java.awt.Color(0, 255, 255));
+        senhaTxt.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
+        senhaTxt.setForeground(new java.awt.Color(0, 0, 255));
+        senhaTxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        senhaTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                senhaTxtActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 255));
-        jButton1.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Entrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entrarBtn.setBackground(new java.awt.Color(0, 0, 255));
+        entrarBtn.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
+        entrarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        entrarBtn.setText("Entrar");
+        entrarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entrarBtnActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel2.setText("Nome/CPF/email:");
+        jLabel2.setText("CPF/email:");
 
         jLabel3.setFont(new java.awt.Font("Swis721 Blk BT", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 255));
@@ -106,11 +111,11 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(213, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpfEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(entrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(198, 198, 198)
@@ -128,13 +133,13 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cpfEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(entrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(231, Short.MAX_VALUE))
         );
 
@@ -150,27 +155,37 @@ public class LoginPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void cpfEmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfEmailTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_cpfEmailTxtActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void senhaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_senhaTxtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void entrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarBtnActionPerformed
+        Pessoa pessoaEntrada = new Pessoa();
+        pessoaEntrada.setEmail(this.cpfEmailTxt.getText());
+        pessoaEntrada.setCpf(this.cpfEmailTxt.getText());
+        pessoaEntrada.setSenha(this.senhaTxt.getText());
+        Pessoa pessoaResultado = control.verificaLogin(pessoaEntrada);
+        
+        if(pessoaResultado != null){
+            frameTelas.trocarTela("menuClientePanel");
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!", "Erro de Login", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_entrarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aviaoLabel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField cpfEmailTxt;
+    private javax.swing.JButton entrarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField senhaTxt;
     // End of variables declaration//GEN-END:variables
 }

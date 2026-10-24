@@ -15,9 +15,9 @@ public class MenuClientePanel extends javax.swing.JPanel {
 
     private FrameTelas frameTelas;
     
-    public MenuClientePanel(FrameTelas frame) {
+    public MenuClientePanel(FrameTelas frameTelas) {
         initComponents();
-        inicializacaoVariaveis();
+        inicializacaoVariaveis(frameTelas);
         minhasConfiguracoes();
     }
 
@@ -32,8 +32,8 @@ public class MenuClientePanel extends javax.swing.JPanel {
         lupaLabel.setIcon(imagemLupa);
     }
     
-    private void inicializacaoVariaveis(){
-        frameTelas = frameTelas;
+    private void inicializacaoVariaveis(FrameTelas frameTelas){
+        this.frameTelas = frameTelas;
     }
     
     @SuppressWarnings("unchecked")
