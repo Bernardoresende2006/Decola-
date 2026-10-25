@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author rot-civ
@@ -16,9 +18,9 @@ public class Gerente extends Pessoa {
         super();
     }
     
-    public Gerente(String cpf, String nome, String endereco, Date dataNascimento, String sexo, float salario){
+    public Gerente(String cpf, String nome, String endereco, Date dataNascimento, String sexo, String email, String senha, float salario){
         
-        super(cpf, nome, endereco, dataNascimento, sexo);
+        super(cpf, nome, endereco, dataNascimento, sexo, email, senha);
         this.salario = salario;
     }
     

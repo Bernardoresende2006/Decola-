@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author rot-civ
@@ -14,8 +16,8 @@ public class Cliente extends Pessoa{
         super();
     }
 
-    public Cliente(String cpf, String nome, String endereco, Date dataNascimento, String sexo){
+    public Cliente(String cpf, String nome, String endereco, Date dataNascimento, String sexo, String email, String senha){
         
-        super(cpf, nome, endereco, dataNascimento, sexo);
+        super(cpf, nome, endereco, dataNascimento, sexo, email, senha);
     }
 }
