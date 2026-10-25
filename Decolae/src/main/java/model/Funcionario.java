@@ -18,10 +18,13 @@ public class Funcionario extends Pessoa {
     private LocalDateTime fim_expediente;
     private float salario;
     
-    public Funcionario(){}
+    public Funcionario(){
+        super();
+    }
     
     public Funcionario(String cargo, String gerente_cpf, LocalDateTime inicio_expediente, LocalDateTime fim_expediente, float salario){
         
+        super();
         this.cargo = cargo;
         this.gerente_cpf = gerente_cpf;
         this.inicio_expediente = inicio_expediente;

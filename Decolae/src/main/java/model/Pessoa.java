@@ -17,15 +17,15 @@ public class Pessoa{
 
     }
 
-    public Pessoa(String cpf, String nome, String endereco, Date dataNascimento, String sexo, String email, String senha){
+    public Pessoa(String cpf, String nome, String email, String senha, String endereco, Date dataNascimento, String sexo){
 
         this.cpf = cpf;
         this.nome = nome;
+        this.email = email;
+        this.senha = senha;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
-        this.email = email;
-        this.senha = senha;
     }
 
     public String getCpf() {
