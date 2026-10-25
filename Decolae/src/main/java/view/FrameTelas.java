@@ -88,9 +88,11 @@ public class FrameTelas extends javax.swing.JFrame {
         // Passa 'this' (o próprio JFrame) para o construtor do JPanel
         JPanel loginPanel = new LoginPanel(this);
         JPanel menuClientePanel = new MenuClientePanel(this);
+        JPanel menuGerentePanel = new MenuGerentePanel(this);
 
         this.add(loginPanel, "loginPanel");
         this.add(menuClientePanel, "menuClientePanel");
+        this.add(menuGerentePanel, "menuGerentePanel");
         
         this.trocarTela("loginPanel");
     }

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Funcionario;
 import tool.Conexao;
 import model.Pessoa;
 
@@ -45,6 +46,24 @@ public class PessoaDAO {
         }
         
         return pessoaResultado;
+    }
+    
+    public String consultaCargoFuncionario(String cpf){
+        
+        String sql = "SELECT cargo FROM empresa.funcionario WHERE cpf=?";
+        
+        try(PreparedStatement consulta = c.prepareStatement(sql)){
+            consulta.setString(1, cpf);
+            
+            ResultSet resultado = consulta.executeQuery();
+            if(resultado.next()){
+                return resultado.getString("cargo");
+            }      
+        }catch(SQLException ex){
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        return null;
     }
     
 }

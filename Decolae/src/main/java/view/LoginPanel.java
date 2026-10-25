@@ -171,7 +171,17 @@ public class LoginPanel extends javax.swing.JPanel {
         Pessoa pessoaResultado = control.verificaLogin(pessoaEntrada);
         
         if(pessoaResultado != null){
-            frameTelas.trocarTela("menuClientePanel");
+            String cargo = control.verificaCargo(pessoaResultado.getCpf());
+            
+            if(cargo.equalsIgnoreCase("Gerente")){
+                frameTelas.trocarTela("menuGerentePanel");
+            }else if(cargo.equalsIgnoreCase("Administrador")){
+                
+            }else if(cargo.equalsIgnoreCase("Piloto") || cargo.equalsIgnoreCase("Copiloto") || cargo.equalsIgnoreCase("Comissário de Bordo")){
+                
+            }else if(cargo == null){
+                frameTelas.trocarTela("menuClientePanel");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!", "Erro de Login", JOptionPane.ERROR_MESSAGE);
         }

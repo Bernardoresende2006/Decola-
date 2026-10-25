@@ -15,5 +15,9 @@ public class PessoaControl {
     public Pessoa verificaLogin(Pessoa pessoaEntrada){
         return dao.consultaLogin(pessoaEntrada);
     }
+    
+    public String verificaCargo(String cpf){
+        return dao.consultaCargoFuncionario(cpf);
+    }
 
 }
