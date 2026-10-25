@@ -176,7 +176,7 @@ public class LoginPanel extends javax.swing.JPanel {
             if(cargo == null){
                 frameTelas.trocarTela("menuClientePanel");
             }else if(cargo.equalsIgnoreCase("Administrador")){
-                
+                frameTelas.trocarTela("menuAdmPanel");
             }else if(cargo.equalsIgnoreCase("Piloto") || cargo.equalsIgnoreCase("Copiloto") || cargo.equalsIgnoreCase("Comissário de Bordo")){
                 
             }else if(cargo.equalsIgnoreCase("Gerente")){

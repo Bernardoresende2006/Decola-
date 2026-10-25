@@ -60,7 +60,7 @@ public class MenuGerentePanel extends JPanel {
         );
 
         JLabel mensagem = new JLabel(
-            "Bem-vindo à área administrativa",
+            "Bem-vindo à área de gerenciamento",
             SwingConstants.CENTER
         );
         mensagem.setFont(new Font("SansSerif", Font.BOLD, 24));
@@ -75,7 +75,7 @@ public class MenuGerentePanel extends JPanel {
         JButton voosBtn = criarBotao("Gerenciar Funcionários");
         JButton funcionariosBtn = criarBotao("Gerenciar Trajeto");
         JButton passagensBtn = criarBotao("Gerenciar Aeronaves");
-        JButton relatoriosBtn = criarBotao("Comprar Passagens");
+        JButton relatoriosBtn = criarBotao("Navegar como cliente");
 
         painelBotoes.add(voosBtn);
         painelBotoes.add(funcionariosBtn);

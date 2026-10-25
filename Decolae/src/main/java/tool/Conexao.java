@@ -12,7 +12,7 @@ public abstract class Conexao {
         try {
             String url = "jdbc:postgresql://localhost:5432/Decolae";
             String usuario = "postgres";
-            String senha = "Yoda2023";
+            String senha = "qwe123";
 
             Connection con = DriverManager.getConnection(url, usuario, senha);
             return con;
