@@ -77,6 +77,10 @@ public class MenuAdmPanel extends JPanel {
         JButton funcionariosButton = criarBotao("Administrar voos");
         JButton usuariosButton = criarBotao("Navegar como cliente");
 
+        usuariosButton.addActionListener(e -> {
+            frameTelas.abrirCliente("menuAdmPanel");
+        });
+
         // Define explicitamente o tamanho dos botões
         funcionariosButton.setPreferredSize(new Dimension(400, 200));
         usuariosButton.setPreferredSize(new Dimension(400, 200));

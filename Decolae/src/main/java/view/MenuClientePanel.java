@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -14,11 +15,13 @@ import javax.swing.ImageIcon;
 public class MenuClientePanel extends javax.swing.JPanel {
 
     private FrameTelas frameTelas;
+    private JButton voltarBtn;
     
     public MenuClientePanel(FrameTelas frameTelas) {
         initComponents();
         inicializacaoVariaveis(frameTelas);
         minhasConfiguracoes();
+        configurarBotaoVoltar();
     }
 
     /**
@@ -32,6 +35,55 @@ public class MenuClientePanel extends javax.swing.JPanel {
         lupaLabel.setIcon(imagemLupa);
     }
     
+    private void configurarBotaoVoltar() {
+        voltarBtn = new JButton("Voltar");
+
+        voltarBtn.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 14));
+
+        voltarBtn.addActionListener(e -> {
+            frameTelas.voltarTelaAnterior();
+        });
+
+        // Adiciona o botão ao painel principal
+        jPanel1.add(voltarBtn);
+
+        // Atualiza o layout para incluir o novo componente
+        javax.swing.GroupLayout layout =
+                (javax.swing.GroupLayout) jPanel1.getLayout();
+
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel2,
+                    javax.swing.GroupLayout.DEFAULT_SIZE,
+                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(20)
+                    .addComponent(voltarBtn)
+                    .addContainerGap())
+        );
+
+        layout.setVerticalGroup(
+            layout.createSequentialGroup()
+                .addComponent(jPanel2,
+                    javax.swing.GroupLayout.PREFERRED_SIZE,
+                    javax.swing.GroupLayout.DEFAULT_SIZE,
+                    javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15)
+                .addComponent(voltarBtn)
+                .addContainerGap(622, Short.MAX_VALUE)
+        );
+    }
+
+    // Muda o texto do botão conforme quem abriu a tela:
+    // cliente (veio do login) vê "Sair"; os demais veem "Voltar"
+    public void atualizarTextoBotao() {
+        if ("loginPanel".equals(frameTelas.getTelaAnterior())) {
+            voltarBtn.setText("Sair");
+        } else {
+            voltarBtn.setText("Voltar");
+        }
+    }
+
     private void inicializacaoVariaveis(FrameTelas frameTelas){
         this.frameTelas = frameTelas;
     }

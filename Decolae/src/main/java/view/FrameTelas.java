@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 public class FrameTelas extends javax.swing.JFrame {
 
     CardLayout cardLayout;
+    private String telaAnterior = "loginPanel";
+    private MenuClientePanel menuClientePanel;
     
     public FrameTelas() {
         initComponents();        
@@ -87,14 +89,16 @@ public class FrameTelas extends javax.swing.JFrame {
     private void configurarNavegacao() {
         // Passa 'this' (o próprio JFrame) para o construtor do JPanel
         JPanel loginPanel = new LoginPanel(this);
-        JPanel menuClientePanel = new MenuClientePanel(this);
+        menuClientePanel = new MenuClientePanel(this);
         JPanel menuGerentePanel = new MenuGerentePanel(this);
         JPanel menuAdmPanel = new MenuAdmPanel(this);
+        JPanel menuMembroPanel = new MenuMembroPanel(this);
 
         this.add(loginPanel, "loginPanel");
         this.add(menuClientePanel, "menuClientePanel");
         this.add(menuGerentePanel, "menuGerentePanel");
         this.add(menuAdmPanel, "menuAdmPanel");
+        this.add(menuMembroPanel, "menuMembroPanel");
         
         this.trocarTela("loginPanel");
     }
@@ -102,8 +106,22 @@ public class FrameTelas extends javax.swing.JFrame {
 // Método público no JFrame para efetuar a troca
     public void trocarTela(String nomeTela) {
         cardLayout.show(this.getContentPane(), nomeTela);
-        pack();
+        this.pack();
         this.setLocationRelativeTo(null);
+    }
+
+    public void abrirCliente(String origem) {
+        telaAnterior = origem;
+        menuClientePanel.atualizarTextoBotao();
+        trocarTela("menuClientePanel");
+    }
+
+    public void voltarTelaAnterior() {
+        trocarTela(telaAnterior);
+    }
+
+    public String getTelaAnterior() {
+        return telaAnterior;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

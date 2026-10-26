@@ -75,12 +75,16 @@ public class MenuGerentePanel extends JPanel {
         JButton voosBtn = criarBotao("Gerenciar Funcionários");
         JButton funcionariosBtn = criarBotao("Gerenciar Trajeto");
         JButton passagensBtn = criarBotao("Gerenciar Aeronaves");
-        JButton relatoriosBtn = criarBotao("Navegar como cliente");
+        JButton navegarBtn = criarBotao("Navegar como cliente");
+
+        navegarBtn.addActionListener(e -> {
+            frameTelas.abrirCliente("menuGerentePanel");
+        });
 
         painelBotoes.add(voosBtn);
         painelBotoes.add(funcionariosBtn);
         painelBotoes.add(passagensBtn);
-        painelBotoes.add(relatoriosBtn);
+        painelBotoes.add(navegarBtn);
 
         conteudo.add(painelBotoes, BorderLayout.CENTER);
 

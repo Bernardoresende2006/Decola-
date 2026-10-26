@@ -174,11 +174,11 @@ public class LoginPanel extends javax.swing.JPanel {
             String cargo = control.verificaCargo(pessoaResultado.getCpf());
             
             if(cargo == null){
-                frameTelas.trocarTela("menuClientePanel");
+                frameTelas.abrirCliente("loginPanel");
             }else if(cargo.equalsIgnoreCase("Administrador")){
                 frameTelas.trocarTela("menuAdmPanel");
             }else if(cargo.equalsIgnoreCase("Piloto") || cargo.equalsIgnoreCase("Copiloto") || cargo.equalsIgnoreCase("Comissário de Bordo")){
-                
+                frameTelas.trocarTela("menuMembroPanel");
             }else if(cargo.equalsIgnoreCase("Gerente")){
                 frameTelas.trocarTela("menuGerentePanel");
             }
