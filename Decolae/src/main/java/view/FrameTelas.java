@@ -31,11 +31,11 @@ public class FrameTelas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         pack();
@@ -87,15 +87,14 @@ public class FrameTelas extends javax.swing.JFrame {
     }
 
     private void configurarNavegacao() {
-        // Passa 'this' (o próprio JFrame) para o construtor do JPanel
         JPanel loginPanel = new LoginPanel(this);
-        menuClientePanel = new MenuClientePanel(this);
+        this.menuClientePanel = new MenuClientePanel(this);
         JPanel menuGerentePanel = new MenuGerentePanel(this);
         JPanel menuAdmPanel = new MenuAdmPanel(this);
         JPanel menuMembroPanel = new MenuMembroPanel(this);
 
         this.add(loginPanel, "loginPanel");
-        this.add(menuClientePanel, "menuClientePanel");
+        this.add(this.menuClientePanel, "menuClientePanel");
         this.add(menuGerentePanel, "menuGerentePanel");
         this.add(menuAdmPanel, "menuAdmPanel");
         this.add(menuMembroPanel, "menuMembroPanel");
@@ -103,16 +102,15 @@ public class FrameTelas extends javax.swing.JFrame {
         this.trocarTela("loginPanel");
     }
 
-// Método público no JFrame para efetuar a troca
     public void trocarTela(String nomeTela) {
-        cardLayout.show(this.getContentPane(), nomeTela);
+        this.cardLayout.show(this.getContentPane(), nomeTela);
         this.pack();
         this.setLocationRelativeTo(null);
     }
 
     public void abrirCliente(String origem) {
-        telaAnterior = origem;
-        menuClientePanel.atualizarTextoBotao();
+        this.telaAnterior = origem;
+        this.menuClientePanel.atualizarTextoBotao();
         trocarTela("menuClientePanel");
     }
 

@@ -12,7 +12,8 @@ public abstract class Conexao {
         try {
             String url = "jdbc:postgresql://localhost:5432/Decolae";
             String usuario = "postgres";
-            String senha = "qwe123";
+            //String senha = "qwe123";
+            String senha = "Yoda2023";
 
             Connection con = DriverManager.getConnection(url, usuario, senha);
             return con;

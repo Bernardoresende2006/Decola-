@@ -6,22 +6,21 @@ package view;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
-
 /**
  *
  * @author lflea
  */
 public class MenuClientePanel extends javax.swing.JPanel {
 
-    private FrameTelas frameTelas;
-    private JButton voltarBtn;
+    private FrameTelas frameTelas;    
     
     public MenuClientePanel(FrameTelas frameTelas) {
         initComponents();
         inicializacaoVariaveis(frameTelas);
         minhasConfiguracoes();
-        configurarBotaoVoltar();
+        criarAssentos();
     }
 
     /**
@@ -33,49 +32,40 @@ public class MenuClientePanel extends javax.swing.JPanel {
     private void minhasConfiguracoes() {       
         Icon imagemLupa = new ImageIcon("src\\main\\java\\Image\\lupa.png");
         lupaLabel.setIcon(imagemLupa);
+        
+        painelAssentos.setLayout(new MigLayout(
+            "wrap 11",
+            "[][][][][]20[][][][][]",
+            "[]10[]10[]10[]10[]10[]10[]10[]10[]10[]"
+        ));
     }
     
-    private void configurarBotaoVoltar() {
-        voltarBtn = new JButton("Voltar");
+    private void criarAssentos() {
+        for (int fileira = 1; fileira <= 10; fileira++) {
+            for (int coluna = 1; coluna <= 5; coluna++) {
+                int numeroAssento = (fileira - 1) * 10 + coluna;
 
-        voltarBtn.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 14));
+                JButton botao = new JButton(
+                    String.valueOf(numeroAssento)
+                );
 
-        voltarBtn.addActionListener(e -> {
-            frameTelas.voltarTelaAnterior();
-        });
+                this.painelAssentos.add(botao);
+            }
 
-        // Adiciona o botão ao painel principal
-        jPanel1.add(voltarBtn);
+            this.painelAssentos.add(new javax.swing.JPanel(), "w 20!");
 
-        // Atualiza o layout para incluir o novo componente
-        javax.swing.GroupLayout layout =
-                (javax.swing.GroupLayout) jPanel1.getLayout();
+            for (int coluna = 6; coluna <= 10; coluna++) {
+                int numeroAssento = (fileira - 1) * 10 + coluna;
 
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2,
-                    javax.swing.GroupLayout.DEFAULT_SIZE,
-                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20)
-                    .addComponent(voltarBtn)
-                    .addContainerGap())
-        );
+                JButton botao = new JButton(
+                    String.valueOf(numeroAssento)
+                );
 
-        layout.setVerticalGroup(
-            layout.createSequentialGroup()
-                .addComponent(jPanel2,
-                    javax.swing.GroupLayout.PREFERRED_SIZE,
-                    javax.swing.GroupLayout.DEFAULT_SIZE,
-                    javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15)
-                .addComponent(voltarBtn)
-                .addContainerGap(622, Short.MAX_VALUE)
-        );
+                this.painelAssentos.add(botao);
+            }
+        }
     }
-
-    // Muda o texto do botão conforme quem abriu a tela:
-    // cliente (veio do login) vê "Sair"; os demais veem "Voltar"
+    
     public void atualizarTextoBotao() {
         if ("loginPanel".equals(frameTelas.getTelaAnterior())) {
             voltarBtn.setText("Sair");
@@ -87,7 +77,7 @@ public class MenuClientePanel extends javax.swing.JPanel {
     private void inicializacaoVariaveis(FrameTelas frameTelas){
         this.frameTelas = frameTelas;
     }
-    
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -104,6 +94,8 @@ public class MenuClientePanel extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lupaLabel = new javax.swing.JLabel();
+        painelAssentos = new javax.swing.JPanel();
+        voltarBtn = new javax.swing.JButton();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -161,7 +153,7 @@ public class MenuClientePanel extends javax.swing.JPanel {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 338, Short.MAX_VALUE))
+                .addGap(0, 418, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,17 +170,48 @@ public class MenuClientePanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout painelAssentosLayout = new javax.swing.GroupLayout(painelAssentos);
+        painelAssentos.setLayout(painelAssentosLayout);
+        painelAssentosLayout.setHorizontalGroup(
+            painelAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 506, Short.MAX_VALUE)
+        );
+        painelAssentosLayout.setVerticalGroup(
+            painelAssentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 295, Short.MAX_VALUE)
+        );
+
+        voltarBtn.setText("jButton1");
+        voltarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(341, 341, 341)
+                        .addComponent(painelAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(voltarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(622, Short.MAX_VALUE))
+                .addGap(126, 126, 126)
+                .addComponent(painelAssentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addComponent(voltarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -207,6 +230,10 @@ public class MenuClientePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void voltarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarBtnActionPerformed
+        frameTelas.voltarTelaAnterior();
+    }//GEN-LAST:event_voltarBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -221,5 +248,7 @@ public class MenuClientePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lupaLabel;
+    private javax.swing.JPanel painelAssentos;
+    private javax.swing.JButton voltarBtn;
     // End of variables declaration//GEN-END:variables
 }
