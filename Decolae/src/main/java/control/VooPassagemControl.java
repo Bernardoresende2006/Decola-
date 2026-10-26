@@ -16,4 +16,8 @@ public class VooPassagemControl {
     public ArrayList<String> procuraOrigemDestino(){
         return dao.consultaOrigemDestinoVoos();
     }
+    
+    public ArrayList<Integer> procuraAssentosOcupados(String cidadeOrigem, String cidadeDestino){
+        return dao.consultaAssentosOcupados(cidadeOrigem, cidadeDestino);
+    }
 }

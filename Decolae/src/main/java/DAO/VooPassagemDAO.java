@@ -38,4 +38,26 @@ public class VooPassagemDAO {
         
         return cidadeResultados;
     }
+    
+    public ArrayList<Integer> consultaAssentosOcupados(String cidadeOrigem, String cidadeDestino){
+        ArrayList<Integer> assentosResultado = new ArrayList<>();
+        
+        String sql = "SELECT p.num_assento FROM empresa.voo AS v JOIN empresa.passagem AS p ON v.num_voo = p.num_voo WHERE v.cidade_origem=? AND v.cidade_destino=?";
+        
+        try(PreparedStatement consulta = c.prepareStatement(sql)){
+            consulta.setString(1, cidadeOrigem);
+            consulta.setString(2, cidadeDestino);
+            
+            ResultSet resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                assentosResultado.add(resultado.getInt("num_assento"));
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro: " + ex.getMessage());
+        }
+        
+        return assentosResultado;
+    }
 }
