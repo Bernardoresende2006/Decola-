@@ -78,7 +78,12 @@ public class MenuClientePanel extends javax.swing.JPanel {
                         this.numAssentoSelecionado = numeroAssento;
                         botao.setBackground(Color.blue);
                         if(this.assentoSelecionadoTemp != null) this.assentoSelecionadoTemp.setBackground(Color.green);
-                        this.assentoSelecionadoTemp = botao;
+                        if(this.assentoSelecionadoTemp == botao){
+                            this.assentoSelecionadoTemp = null;
+                            this.numAssentoSelecionado = -1;
+                        }else{
+                            this.assentoSelecionadoTemp = botao;
+                        }                        
                     });
                 }                  
 
@@ -420,10 +425,27 @@ public class MenuClientePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_destinoComboActionPerformed
 
     private void comprarPassagemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarPassagemBtnActionPerformed
-        if(this.numAssentoSelecionado != -1){
-            
+        if(this.numAssentoSelecionado != -1 && this.origemCombo.getSelectedIndex() != -1 && this.destinoCombo.getSelectedIndex() != -1 && this.horarioVooCombo.getSelectedIndex() != -1){
+            PagamentoDialog dialog = new PagamentoDialog(this.frameTelas, true);            
+
+            dialog.setVisible(true); 
+
+            if (dialog.isPagamentoConfirmado()) {
+                String formaPagamento = dialog.getFormaSelecionada();
+
+                // Sucesso: prossiga com o salvamento/persistência no PostgreSQL
+                
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Pagamento confirmado via " + formaPagamento + "!\n" +
+                    "Assento reservado: " + this.numAssentoSelecionado, 
+                    "Sucesso", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Operação de pagamento cancelada.", "Aviso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Nenhum Assento Selecionado!", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Escolha todos os dados!", "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_comprarPassagemBtnActionPerformed
 

@@ -85,4 +85,8 @@ public class VooPassagemDAO {
         
         return horarioResult;
     }
+    
+    public boolean inserePassagem(int numAssento, String clienteCpf, String origem, String destino){
+        String sql = "INSERT INTO empresa.passagem";
+    }
 }
