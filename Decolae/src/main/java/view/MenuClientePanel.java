@@ -6,6 +6,7 @@ package view;
 
 import control.VooPassagemControl;
 import java.awt.Color;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ public class MenuClientePanel extends javax.swing.JPanel {
     private VooPassagemControl control;
     private ArrayList<String> cidades;
     private boolean carregandoCidades;
+    private boolean carregandoHorarios;
     private int numAssentoSelecionado;
     private JButton assentoSelecionadoTemp;
     
@@ -48,6 +50,7 @@ public class MenuClientePanel extends javax.swing.JPanel {
         
         this.origemCombo.setEnabled(false);
         this.destinoCombo.setEnabled(false);
+        this.horarioVooCombo.setEnabled(false);
     }
     
     private void criarAssentos() {
@@ -55,7 +58,8 @@ public class MenuClientePanel extends javax.swing.JPanel {
         this.numAssentoSelecionado = -1;
         this.assentoSelecionadoTemp = null;
         
-        ArrayList<Integer> assentosOcupados = this.control.procuraAssentosOcupados(""+this.origemCombo.getSelectedItem(), ""+this.destinoCombo.getSelectedItem());
+        ArrayList<Integer> assentosOcupados = this.control.procuraAssentosOcupados(""+this.origemCombo.getSelectedItem(), 
+                ""+this.destinoCombo.getSelectedItem(), LocalTime.parse(this.horarioVooCombo.getSelectedItem()+""));
         
         for (int fileira = 1; fileira <= 10; fileira++) {
             for (int coluna = 1; coluna <= 5; coluna++) {
@@ -112,14 +116,19 @@ public class MenuClientePanel extends javax.swing.JPanel {
     
     private void procuraVooOrigemDestino(){
         this.cidades = this.control.procuraOrigemDestino();
+        ArrayList<String> itensAdicionadosTemp = new ArrayList<>();
         
         if(!this.cidades.isEmpty()){
             this.origemCombo.setEnabled(true);
             this.carregandoCidades = true;
+            this.origemCombo.removeAll();
             
             for(int i=0; i < cidades.size(); i++){
                 if(i%2 == 0){
-                    this.origemCombo.addItem(cidades.get(i));
+                    if(!itensAdicionadosTemp.contains(this.cidades.get(i))){
+                        this.origemCombo.addItem(this.cidades.get(i));
+                        itensAdicionadosTemp.add(this.cidades.get(i));
+                    }                       
                 }
             }
             this.origemCombo.setSelectedIndex(-1);
@@ -164,6 +173,8 @@ public class MenuClientePanel extends javax.swing.JPanel {
         painelAssentos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         comprarPassagemBtn = new javax.swing.JButton();
+        horarioVooCombo = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -288,6 +299,16 @@ public class MenuClientePanel extends javax.swing.JPanel {
             }
         });
 
+        horarioVooCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                horarioVooComboActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Horários Disponíveis:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -303,35 +324,41 @@ public class MenuClientePanel extends javax.swing.JPanel {
                 .addComponent(fundoPoltronaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(origemCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(destinoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(origemCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(destinoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(horarioVooCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(163, 163, 163))
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(fundoPoltronaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(origemCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(destinoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(fundoPoltronaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(voltarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comprarPassagemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(origemCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(destinoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(horarioVooCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -347,12 +374,14 @@ public class MenuClientePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void voltarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarBtnActionPerformed
-        frameTelas.voltarTelaAnterior();
-        this.origemCombo.removeAll();
-        this.destinoCombo.removeAll();
+        this.origemCombo.setSelectedIndex(-1);
+        this.destinoCombo.removeAllItems();
+        this.horarioVooCombo.removeAllItems();
         this.assentoSelecionadoTemp = null;
         this. numAssentoSelecionado = -1;
         this.painelAssentos.removeAll();
+        
+        frameTelas.voltarTelaAnterior();        
     }//GEN-LAST:event_voltarBtnActionPerformed
 
     private void origemComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_origemComboActionPerformed
@@ -360,9 +389,14 @@ public class MenuClientePanel extends javax.swing.JPanel {
             String selecionado = ""+this.origemCombo.getSelectedItem();
             this.destinoCombo.removeAllItems();
             
-            for(int i=0; i < cidades.size(); i++){
-                if(i%2 == 0 && cidades.get(i).equalsIgnoreCase(selecionado)){
-                    this.destinoCombo.addItem(cidades.get(i+1));
+            ArrayList<String> cidadesAdcionadas = new ArrayList<>();
+            
+            for(int i=0; i < this.cidades.size(); i++){
+                if(i%2 == 0 && this.cidades.get(i).equalsIgnoreCase(selecionado)){
+                    if(!cidadesAdcionadas.contains(this.cidades.get(i+1))){
+                        this.destinoCombo.addItem(this.cidades.get(i+1));
+                        cidadesAdcionadas.add(this.cidades.get(i+1));
+                    }                    
                 }
             }
             this.destinoCombo.setEnabled(true);
@@ -371,8 +405,17 @@ public class MenuClientePanel extends javax.swing.JPanel {
 
     private void destinoComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinoComboActionPerformed
         if(this.destinoCombo.getSelectedIndex() != -1){
-            this.painelAssentos.setVisible(true);
-            criarAssentos();
+            ArrayList<LocalTime> horarios = control.procuraHorariosVoo(this.origemCombo.getSelectedItem()+"", this.destinoCombo.getSelectedItem()+"");
+            if(!horarios.isEmpty()){
+                this.carregandoCidades = true;
+                this.horarioVooCombo.removeAllItems();
+                this.horarioVooCombo.setEnabled(true);
+                
+                for(LocalTime h : horarios){
+                    this.horarioVooCombo.addItem(""+h);
+                }
+                this.carregandoCidades = false;
+            }            
         }
     }//GEN-LAST:event_destinoComboActionPerformed
 
@@ -384,14 +427,23 @@ public class MenuClientePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_comprarPassagemBtnActionPerformed
 
+    private void horarioVooComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horarioVooComboActionPerformed
+        if(this.horarioVooCombo.getSelectedIndex() != -1 && this.carregandoHorarios == false){
+            this.painelAssentos.setVisible(true);
+            criarAssentos();
+        }
+    }//GEN-LAST:event_horarioVooComboActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton comprarPassagemBtn;
     private javax.swing.JComboBox<String> destinoCombo;
     private javax.swing.JPanel fundoPoltronaPanel;
+    private javax.swing.JComboBox<String> horarioVooCombo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -50,7 +50,7 @@ public class PessoaDAO {
     
     public String consultaCargoFuncionario(String cpf){
         
-        String sql = "SELECT cargo FROM empresa.funcionario WHERE cpf=?";
+        String sql = "SELECT cargo FROM empresa.funcionario WHERE funcionario_cpf=?";
         
         try(PreparedStatement consulta = c.prepareStatement(sql)){
             consulta.setString(1, cpf);
