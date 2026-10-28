@@ -385,6 +385,8 @@ public class MenuClientePanel extends javax.swing.JPanel {
         this.assentoSelecionadoTemp = null;
         this. numAssentoSelecionado = -1;
         this.painelAssentos.removeAll();
+        this.destinoCombo.setEnabled(false);
+        this.horarioVooCombo.setEnabled(false);
         
         frameTelas.voltarTelaAnterior();        
     }//GEN-LAST:event_voltarBtnActionPerformed
