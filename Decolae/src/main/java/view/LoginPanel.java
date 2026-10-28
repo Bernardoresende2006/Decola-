@@ -85,6 +85,11 @@ public class LoginPanel extends javax.swing.JPanel {
                 senhaTxtActionPerformed(evt);
             }
         });
+        senhaTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                senhaTxtKeyPressed(evt);
+            }
+        });
 
         entrarBtn.setBackground(new java.awt.Color(0, 0, 255));
         entrarBtn.setFont(new java.awt.Font("Stylus BT", 1, 14)); // NOI18N
@@ -187,6 +192,10 @@ public class LoginPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!", "Erro de Login", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_entrarBtnActionPerformed
+
+    private void senhaTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaTxtKeyPressed
+        if(evt.getKeyChar() == '\n') this.entrarBtn.doClick();
+    }//GEN-LAST:event_senhaTxtKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
