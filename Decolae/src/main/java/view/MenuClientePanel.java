@@ -433,14 +433,23 @@ public class MenuClientePanel extends javax.swing.JPanel {
             if (dialog.isPagamentoConfirmado()) {
                 String formaPagamento = dialog.getFormaSelecionada();
 
-                // Sucesso: prossiga com o salvamento/persistência no PostgreSQL
+                boolean resultInsertPassagem = control.inserePassagemControl(this.numAssentoSelecionado,this.frameTelas.getUsuario().getCpf(), 
+                        origemCombo.getSelectedItem()+"", destinoCombo.getSelectedItem()+"", LocalTime.parse(horarioVooCombo.getSelectedItem()+""));
                 
-                javax.swing.JOptionPane.showMessageDialog(this, 
+                if(resultInsertPassagem){
+                    javax.swing.JOptionPane.showMessageDialog(this, 
                     "Pagamento confirmado via " + formaPagamento + "!\n" +
                     "Assento reservado: " + this.numAssentoSelecionado, 
                     "Sucesso", 
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
+                    
+                    criarAssentos();
+                    this.origemCombo.setSelectedIndex(-1);
+                    this.destinoCombo.setSelectedIndex(-1);
+                    this.horarioVooCombo.setSelectedIndex(-1);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Algo deu errado na operação de compra!", "", JOptionPane.ERROR_MESSAGE);
+                }               
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Operação de pagamento cancelada.", "Aviso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }

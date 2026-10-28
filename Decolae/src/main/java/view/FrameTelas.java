@@ -2,6 +2,7 @@ package view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import model.Pessoa;
 
 /**
  *
@@ -12,6 +13,7 @@ public class FrameTelas extends javax.swing.JFrame {
     CardLayout cardLayout;
     private String telaAnterior = "loginPanel";
     private MenuClientePanel menuClientePanel;
+    private Pessoa usuario;
     
     public FrameTelas() {
         initComponents();        
@@ -52,6 +54,7 @@ public class FrameTelas extends javax.swing.JFrame {
     private void inicializacaoVariaveis(){
         cardLayout = new CardLayout();
         getContentPane().setLayout(cardLayout);
+        this.usuario = null;
     }
     
     public static void main(String args[]) {
@@ -120,6 +123,14 @@ public class FrameTelas extends javax.swing.JFrame {
 
     public String getTelaAnterior() {
         return telaAnterior;
+    }
+    
+    public void setUsuario(Pessoa usuario){
+        this.usuario = usuario;
+    }
+    
+    public Pessoa getUsuario(){
+        return this.usuario;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

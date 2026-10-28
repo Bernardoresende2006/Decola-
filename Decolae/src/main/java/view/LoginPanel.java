@@ -171,6 +171,7 @@ public class LoginPanel extends javax.swing.JPanel {
         Pessoa pessoaResultado = control.verificaLogin(pessoaEntrada);
         
         if(pessoaResultado != null){
+            this.frameTelas.setUsuario(pessoaResultado);
             String cargo = control.verificaCargo(pessoaResultado.getCpf());
             
             if(cargo == null){

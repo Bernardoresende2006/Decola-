@@ -25,4 +25,8 @@ public class VooPassagemControl {
     public ArrayList<LocalTime> procuraHorariosVoo(String cidadeOrigem, String cidadeDestino){
         return dao.consultaHorariosVoo(cidadeOrigem, cidadeDestino);
     }
+    
+    public boolean inserePassagemControl(int numAssento, String clienteCpf, String origem, String destino, LocalTime horarioPartida){
+        return dao.inserePassagem(numAssento, clienteCpf, origem, destino, horarioPartida);
+    }
 }
